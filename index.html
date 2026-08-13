@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interview Playbook — Shreyas Khandale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B0E14; --surface:#131824; --surface-2:#1A2130; --line:#242D40;
+  --ink:#E9EDF5; --muted:#8D98AF; --dim:#5D6982;
+  --indigo:#6366F1; --teal:#2DD4BF; --amber:#F59E0B;
+  --grad:linear-gradient(135deg,#6366F1 0%,#2DD4BF 100%);
+  --display:'Space Grotesk',system-ui,sans-serif;
+  --body:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(ellipse 70% 45% at 50% -15%,rgba(99,102,241,.14),transparent),
+    radial-gradient(ellipse 55% 35% at 92% 8%,rgba(45,212,191,.06),transparent);
+  background-attachment:fixed;
+}
+.wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:5px}
+
+/* HERO */
+.hero{padding:64px 0 34px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:20px;display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.eyebrow::before{content:"";width:30px;height:1px;background:var(--teal)}
+h1{font-family:var(--display);font-size:clamp(2.1rem,5.6vw,3.7rem);font-weight:700;line-height:1.05;letter-spacing:-.032em;margin-bottom:16px}
+h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--muted);font-size:1.04rem;max-width:64ch}
+
+/* LOOP MAP — signature */
+.map{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;margin:36px 0 10px;overflow-x:auto}
+.map h3{font-family:var(--display);font-size:1.02rem;font-weight:600;margin-bottom:4px}
+.map .cap{color:var(--dim);font-size:.83rem;margin-bottom:20px}
+table{width:100%;border-collapse:collapse;min-width:600px}
+th{font-family:var(--mono);font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;color:var(--dim);font-weight:500;text-align:center;padding:0 0 12px;vertical-align:bottom}
+th:first-child{text-align:left;width:34%}
+td{padding:11px 0;border-top:1px solid rgba(36,45,64,.7);text-align:center;vertical-align:middle}
+td:first-child{text-align:left;font-size:.89rem;font-weight:500}
+td:first-child small{display:block;color:var(--dim);font-size:.74rem;font-weight:400;margin-top:1px}
+.dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+.d-3{background:var(--grad);box-shadow:0 0 10px rgba(45,212,191,.4)}
+.d-2{background:#3F4A66}
+.d-1{background:transparent;border:1px solid #2C3548}
+.legend{display:flex;gap:20px;margin-top:18px;flex-wrap:wrap;font-family:var(--mono);font-size:.68rem;color:var(--dim)}
+.legend span{display:flex;align-items:center;gap:7px}
+
+/* TABS */
+.tabs{position:sticky;top:0;z-index:50;background:rgba(11,14,20,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);margin:26px 0 36px}
+.tabs-in{display:flex;gap:4px;overflow-x:auto;padding:11px 0;scrollbar-width:none}
+.tabs-in::-webkit-scrollbar{display:none}
+.tab{background:none;border:none;color:var(--muted);font-family:var(--body);font-size:.87rem;font-weight:500;padding:8px 16px;border-radius:9px;cursor:pointer;white-space:nowrap;transition:all .18s}
+.tab:hover{color:var(--ink);background:var(--surface)}
+.tab[aria-selected="true"]{color:#07090F;background:var(--grad);font-weight:600}
+
+.panel{display:none;animation:f .28s ease}
+.panel.on{display:block}
+@keyframes f{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+section{margin-bottom:42px}
+h2{font-family:var(--display);font-size:1.42rem;font-weight:600;letter-spacing:-.014em;margin-bottom:7px}
+.lede{color:var(--muted);font-size:.93rem;margin-bottom:22px;max-width:70ch}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-bottom:11px;overflow:hidden}
+.card-head{width:100%;display:flex;align-items:center;gap:15px;padding:17px 20px;background:none;border:none;color:var(--ink);font-family:var(--body);font-size:1rem;text-align:left;cursor:pointer;transition:background .18s}
+.card-head:hover{background:var(--surface-2)}
+.idx{font-family:var(--mono);font-size:.71rem;color:var(--teal);flex-shrink:0;min-width:26px}
+.ct{flex:1;font-weight:600;font-family:var(--display);letter-spacing:-.006em}
+.cw{font-family:var(--mono);font-size:.69rem;color:var(--dim);flex-shrink:0}
+.chev{color:var(--dim);transition:transform .25s;flex-shrink:0;font-size:.78rem}
+.card.open .chev{transform:rotate(90deg)}
+.card-body{max-height:0;overflow:hidden;transition:max-height .32s ease}
+.card.open .card-body{max-height:4000px}
+.ci{padding:4px 20px 20px;border-top:1px solid var(--line)}
+.note{color:var(--muted);font-size:.88rem;margin:15px 0 10px;padding-left:13px;border-left:2px solid var(--indigo)}
+
+/* ITEMS */
+.item{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid rgba(36,45,64,.5)}
+.item:last-child{border-bottom:none}
+.item input{appearance:none;width:18px;height:18px;border:1.5px solid #36415B;border-radius:6px;background:var(--surface-2);cursor:pointer;flex-shrink:0;margin-top:3px;transition:all .18s;position:relative}
+.item input:hover{border-color:var(--teal)}
+.item input:checked{background:var(--grad);border-color:transparent}
+.item input:checked::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#07090F;font-size:11px;font-weight:700}
+.item label{flex:1;cursor:pointer;font-size:.93rem;transition:color .18s}
+.item input:checked+label{color:var(--dim)}
+.item label small{display:block;color:var(--dim);font-size:.79rem;margin-top:3px;line-height:1.5}
+.item a{color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(45,212,191,.28);font-size:.78rem;display:inline-block;margin-top:5px}
+.item a:hover{border-bottom-color:var(--teal)}
+
+/* Q BANK */
+.qb{background:var(--surface-2);border-radius:10px;padding:15px 17px;margin-top:14px}
+.qb h5{font-family:var(--mono);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:9px}
+.qb li{list-style:none;font-size:.86rem;color:var(--muted);padding:5px 0 5px 16px;position:relative}
+.qb li::before{content:"→";position:absolute;left:0;color:var(--dim);font-size:.75rem}
+
+/* RESOURCES */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:12px}
+.res{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:9px;text-decoration:none;color:inherit;transition:transform .2s,border-color .2s}
+.res:hover{transform:translateY(-3px);border-color:#3A4760}
+.rt{display:flex;justify-content:space-between;align-items:flex-start;gap:9px}
+.res h4{font-family:var(--display);font-size:.96rem;font-weight:600;line-height:1.32}
+.res p{color:var(--muted);font-size:.83rem;line-height:1.52}
+.tag{font-family:var(--mono);font-size:.59rem;padding:3px 8px;border-radius:99px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;flex-shrink:0}
+.t-core{background:rgba(245,158,11,.13);color:var(--amber)}
+.t-vid{background:rgba(99,102,241,.16);color:#A7AAFF}
+.t-free{background:rgba(45,212,191,.12);color:var(--teal)}
+.rm{font-family:var(--mono);font-size:.67rem;color:var(--dim);margin-top:auto;padding-top:7px}
+
+/* CALLOUT */
+.co{border-radius:11px;padding:15px 18px;margin-bottom:12px;border:1px solid}
+.co b{font-size:.9rem;display:block;margin-bottom:3px;font-family:var(--display)}
+.co p{color:var(--muted);font-size:.86rem}
+.co-a{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.22)}.co-a b{color:var(--amber)}
+.co-i{background:rgba(99,102,241,.06);border-color:rgba(99,102,241,.22)}.co-i b{color:#A7AAFF}
+.co-t{background:rgba(45,212,191,.06);border-color:rgba(45,212,191,.22)}.co-t b{color:var(--teal)}
+
+/* PROGRESS */
+.prog{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:13px 18px;margin-bottom:24px}
+.prog .lbl{font-family:var(--mono);font-size:.7rem;color:var(--dim);white-space:nowrap}
+.bar{flex:1;height:7px;background:var(--surface-2);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--grad);border-radius:99px;transition:width .45s cubic-bezier(.4,0,.2,1)}
+.prog .n{font-family:var(--mono);font-size:.82rem;color:var(--ink);white-space:nowrap}
+
+.btn{background:var(--surface-2);border:1px solid var(--line);color:var(--muted);font-family:var(--mono);font-size:.71rem;padding:8px 14px;border-radius:8px;cursor:pointer;transition:all .18s}
+.btn:hover{color:var(--ink);border-color:#3A4760}
+.foot{border-top:1px solid var(--line);padding:26px 0 48px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center}
+.foot p{color:var(--dim);font-size:.77rem;font-family:var(--mono)}
+@media(max-width:640px){.hero{padding:38px 0 22px}.cw{display:none}.map{padding:18px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero wrap">
+  <div class="eyebrow">MS Computer Science · Binghamton · AI &amp; Machine Learning</div>
+  <h1>The interview<br><span class="g">playbook.</span></h1>
+  <p class="sub">Four tracks, one set of materials. Everything here is verified live and free. Open the module you're working on, follow the sources, close the tab.</p>
+
+  <div class="map">
+    <h3>What each loop actually tests</h3>
+    <p class="cap">Four tracks means four different loops. This is which stage appears where — so you study the right thing for the interview in front of you.</p>
+    <table>
+      <thead><tr><th>Interview stage</th><th>Applied ML</th><th>ML Research</th><th>SWE</th><th>Data Analyst</th></tr></thead>
+      <tbody id="mapBody"></tbody>
+    </table>
+    <div class="legend">
+      <span><i class="dot d-3"></i> Always</span>
+      <span><i class="dot d-2"></i> Sometimes</span>
+      <span><i class="dot d-1"></i> Rare</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="wrap tabs-in" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-p="start">Start here</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="plan">The plan</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="sd">System design</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="ml">ML depth</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="dsa">DSA</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="stories">Your stories</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="res">Resources</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<div class="panel on" id="p-start">
+  <section>
+    <h2>Read this first</h2>
+    <p class="lede">Three things decide outcomes. Everything else on this page is optimization around them.</p>
+    <div class="co co-a">
+      <b>System design is the one real gap</b>
+      <p>Zero background, and it's binary — you either have the vocabulary and a delivery framework, or you visibly don't. Three blocks a week closes it in six weeks. This is the module to open first.</p>
+    </div>
+    <div class="co co-i">
+      <b>Cold re-solving, not new problems</b>
+      <p>Reading your own past solution and feeling recognition is not retrieval practice, and the evidence that it transfers is weak. Re-solve from scratch a week later with the old code closed. If you can't reproduce it, it goes back in the queue.</p>
+    </div>
+    <div class="co co-t">
+      <b>Calibration is your differentiator</b>
+      <p>You proved an exact law for how temperature scaling distorts a Bayes-error estimator. Almost no candidate discusses calibration past "we use temperature scaling." Learn to steer evaluation-metric questions there.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>The first week</h2>
+    <p class="lede">If you do nothing else from this page, do these five things in this order.</p>
+    <div id="firstWeek"></div>
+  </section>
+
+  <section>
+    <h2>How the modules fit together</h2>
+    <p class="lede">Two continuous tracks and three that come and go.</p>
+    <div id="rhythm"></div>
+  </section>
+</div>
+
+<div class="panel" id="p-plan"><section>
+  <h2>The walkthrough</h2>
+  <p class="lede">Five stages. The order is deliberate — system design first because it's the binary gap, DSA continuous because it's the floor, everything else fits around those two.</p>
+  <div id="phases"></div>
+</section></div>
+
+<div class="panel" id="p-sd"><section>
+  <h2>System design from zero</h2>
+  <p class="lede">Six modules. The unlock is that you've already built one of these — a seven-service containerized stack with Airflow ingestion, OpenSearch retrieval, Redis caching, and PostgreSQL persistence on EC2. Anchor every concept to it rather than learning it abstractly.</p>
+  <div id="sdMods"></div>
+</section></div>
+
+<div class="panel" id="p-ml"><section>
+  <h2>ML depth and breadth</h2>
+  <p class="lede">You have depth in a narrow band and gaps in the standard sweep. Close the attention gap first — an interviewer who reads your preprint will assume you can derive multi-head on a whiteboard.</p>
+  <div id="mlMods"></div>
+</section></div>
+
+<div class="panel" id="p-dsa"><section>
+  <h2>Finish NeetCode 150</h2>
+  <p class="lede">Nine topics remain. Graphs and 1-D DP are the highest frequency — if time compresses, do those before greedy and math.</p>
+  <div id="dsaMods"></div>
+</section></div>
+
+<div class="panel" id="p-stories"><section>
+  <h2>Your material</h2>
+  <p class="lede">Interview probing is how exaggeration gets caught, and every number on your resume is a question waiting to be asked. These are the stories you own — rehearse them until the derivation is automatic.</p>
+  <div id="stories"></div>
+</section></div>
+
+<div class="panel" id="p-res"><section>
+  <h2>Resource vault</h2>
+  <p class="lede">Verified live. All free. If you eventually buy one thing, make it Hello Interview at $79/year — after the free tier runs out, not before.</p>
+  <div class="grid" id="resGrid"></div>
+</section></div>
+
+<div class="foot wrap">
+  <p>Checkmarks save to this browser only.</p>
+  <div style="display:flex;gap:8px">
+    <button class="btn" id="expandAll">Expand all</button>
+    <button class="btn" id="reset">Clear checkmarks</button>
+  </div>
+</div>
+</main>
+
+<script>
+const MAP=[
+ ['Recruiter screen','<small>Fit, timeline, authorization</small>',3,3,3,3],
+ ['Online assessment','<small>Timed DSA, sometimes SQL</small>',2,1,3,2],
+ ['DSA rounds','<small>Two to four, live coding</small>',3,2,3,2],
+ ['System design','<small>General distributed systems</small>',2,1,3,1],
+ ['ML system design','<small>Recsys, ranking, serving</small>',2,2,1,1],
+ ['ML theory depth','<small>Losses, optimizers, evaluation</small>',3,3,1,2],
+ ['Research discussion','<small>Your paper, your methods</small>',2,3,1,1],
+ ['SQL / analytics case','<small>Windows, CTEs, metric choice</small>',1,1,1,3],
+ ['Behavioral','<small>Projects, conflict, ownership</small>',3,3,3,3]
+];
+
+const FIRST=[{id:'fw',n:'→',title:'Do these five, in order',when:'',note:'Two of them are videos totalling under two and a half hours. The other three are setup.',
+ tasks:[
+  {id:'f1',l:'3Blue1Brown — Attention, step by step',s:'26 minutes. Watch before Karpathy: the geometric picture makes the code legible rather than just typeable.',u:'https://www.3blue1brown.com/lessons/attention'},
+  {id:'f2',l:'Karpathy — Let\'s build GPT from scratch',s:'1h56m. Highest-leverage single video available to you. Closes the gap between having a preprint and being able to build attention.',u:'https://karpathy.ai/zero-to-hero.html'},
+  {id:'f3',l:'Hello Interview — System Design in a Hurry, first two sections',s:'Framework before components. Your gap is knowing what a good answer sounds like, not infrastructure literacy.',u:'https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction'},
+  {id:'f4',l:'Build your Grind75 schedule',s:'Parameterizes to your real available hours instead of a generic 12-week plan.',u:'https://www.techinterviewhandbook.org/grind75'},
+  {id:'f5',l:'Metric-defense pass on all four resumes',s:'Every number gets a rehearsed derivation. One afternoon, and it is the highest-yield hour-for-hour work on this page.'}
+ ]}];
+
+const RHY=[
+ {id:'r1',n:'A',title:'Continuous — never stops',when:'daily',note:'These two run from now until your last interview. Everything else is layered on top.',
+  tasks:[
+   {id:'r101',l:'Two DSA problems',s:'One new from the Grind75 schedule, one cold re-solve from five to seven days back.'},
+   {id:'r102',l:'System design, three blocks a week',s:'90 minutes each. Monday, Wednesday, Friday works well because it leaves the weekend free for longer material.'}
+  ]},
+ {id:'r2',n:'B',title:'Layered — comes and goes',when:'weekly',note:'Fit these into the gaps. Drop any of them in a heavy week without guilt.',
+  tasks:[
+   {id:'r201',l:'ML breadth, two blocks a week',s:'The standard sweep. Sixty minutes each.'},
+   {id:'r202',l:'From-scratch implementation drill, one a week',s:'Rotate: attention, logistic regression, k-means, training loop, beam search.'},
+   {id:'r203',l:'Mock interviews',s:'Start at one a month, move to two a week by October. Book the first before you feel ready — that is the point of a mock.'}
+  ]}];
+
+const PHASES=[
+ {id:'p1',n:'01',title:'Ship the paper, close the attention gap',when:'through Aug',
+  note:'The TAE submission is the priority in this window. Alongside it, protect only the daily floor and the two videos. Nothing else gets added.',
+  tasks:[
+   {id:'p101',l:'Submit the TAE workshop paper'},
+   {id:'p102',l:'3Blue1Brown Ch.6 + Karpathy "Let\'s build GPT"',s:'Two hours twenty-two minutes total'},
+   {id:'p103',l:'System design at reduced volume — two blocks a week',s:'Do not wait for September. An interview could land in week two, and this is the round you would fail.'},
+   {id:'p104',l:'Metric-defense pass on all four resumes'}
+  ]},
+ {id:'p2',n:'02',title:'System design sprint',when:'September',
+  note:'Three blocks a week. Full Hello Interview course start to finish, then two recorded mock replays. First live mock at month end regardless of readiness.',
+  tasks:[
+   {id:'p201',l:'Hello Interview — System Design in a Hurry, complete',u:'https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction'},
+   {id:'p202',l:'Two interviewing.io system design replays',s:'Real mocks where the interviewer explains afterward what registered as a hire signal',u:'https://interviewing.io/learn'},
+   {id:'p203',l:'NeetCode: Backtracking, Graphs, Advanced Graphs'},
+   {id:'p204',l:'First live mock',u:'https://www.pramp.com/'}
+  ]},
+ {id:'p3',n:'03',title:'Dynamic programming and mock volume',when:'October',
+  note:'DP is where watching solutions fails hardest — they look obvious in hindsight and teach you nothing about finding the recurrence. Derive it every time.',
+  tasks:[
+   {id:'p301',l:'1-D and 2-D DP complete',s:'Aditya Verma for deriving recurrences, NeetCode for the specific NC150 problems'},
+   {id:'p302',l:'Hello Interview — ML System Design track',s:'Free, and it publishes the rubric interviewers actually score against',u:'https://www.hellointerview.com/learn/ml-system-design/in-a-hurry/introduction'},
+   {id:'p303',l:'Mocks to two a week'},
+   {id:'p304',l:'ML breadth sweep — bias-variance through evaluation metrics'}
+  ]},
+ {id:'p4',n:'04',title:'Close the remaining topics',when:'November',
+  note:'Everything left on NeetCode, plus track-specific depth depending on what is actually live in your pipeline. Do not study for loops you are not in.',
+  tasks:[
+   {id:'p401',l:'Greedy, intervals, math and geometry, bit manipulation'},
+   {id:'p402',l:'CS336: Inference, Evaluation, Scaling Laws',s:'Only if ML Research Engineer roles are live',u:'https://stanford-cs336.github.io/spring2025/'},
+   {id:'p403',l:'SQL: window functions, CTEs, complex joins',s:'Only if Data Analyst roles are live',u:'https://datalemur.com/'},
+   {id:'p404',l:'From-scratch drills, one a week'}
+  ]},
+ {id:'p5',n:'05',title:'Consolidate',when:'December',
+  note:'No new material enters the plan. Cold re-solving and full-loop mocks only. Trust what you built.',
+  tasks:[
+   {id:'p501',l:'Cold re-solve everything previously solved',s:'From scratch. Needing the old code means it goes back in the queue.'},
+   {id:'p502',l:'Full-loop mocks weekly'},
+   {id:'p503',l:'Rehearse the four project stories until automatic'},
+   {id:'p504',l:'Company-specific prep as interviews land'}
+  ]}];
+
+const SD=[
+ {id:'s1',n:'01',title:'Load balancing and caching',when:'module 1',
+  note:'Cache-aside, write-through, write-behind, TTL, and the invalidation problem. You built the Redis layer on the RAG stack — that is cache-aside, and naming it that way in the room is worth more than reciting a definition.',
+  tasks:[
+   {id:'s101',l:'L4 vs L7 load balancing, health checks, sticky sessions'},
+   {id:'s102',l:'Cache strategies and why invalidation is the hard part'},
+   {id:'s103',l:'Write your Redis decision as a two-minute story',s:'SHA-256 keying, what you cached, what you deliberately did not'}
+  ],
+  q:['Where would you put a cache in this design, and what breaks when it goes stale?','Why cache-aside over write-through here?','How do you handle a cache stampede on a hot key?']},
+ {id:'s2',n:'02',title:'Databases and indexing',when:'module 2',
+  note:'SQL versus NoSQL is a decision you defend, not a preference you state. Your stack runs both PostgreSQL and OpenSearch — be ready to say why each earns its place.',
+  tasks:[
+   {id:'s201',l:'B-tree and composite indexes, and when an index hurts'},
+   {id:'s202',l:'SQL vs NoSQL selection criteria'},
+   {id:'s203',l:'Articulate why your stack runs PostgreSQL and OpenSearch together'}
+  ],
+  q:['What would you index here, and what does it cost on write?','When would you denormalize?','Why not put everything in one database?']},
+ {id:'s3',n:'03',title:'Sharding and replication',when:'module 3',
+  note:'The topic interviewers most often probe one layer past the framework. Know shard keys and replication lag well enough to reason about failure, not just define them.',
+  tasks:[
+   {id:'s301',l:'Horizontal partitioning, shard key selection, hot shards'},
+   {id:'s302',l:'Leader-follower, multi-leader, replication lag'},
+   {id:'s303',l:'DDIA 2nd edition — the three free chapters',u:'https://lp.scylladb.com/designing-data-intensive-apps-book-offer'}
+  ],
+  q:['What is your shard key and what happens when it skews?','A follower is thirty seconds behind. What does the user see?','How do you reshard without downtime?']},
+ {id:'s4',n:'04',title:'Queues and async processing',when:'module 4',
+  note:'Your strongest ground and you may not realize it. The voice-AI backend takes CRM webhooks into a retrying job queue — that is this entire module, already built and already yours.',
+  tasks:[
+   {id:'s401',l:'Message queues, pub/sub, consumer groups, backpressure'},
+   {id:'s402',l:'At-least-once vs exactly-once, dedupe keys, retry storms'},
+   {id:'s403',l:'Write your webhook queue up as an idempotency story',s:'This is stronger interview material than any video on this page'}
+  ],
+  q:['The downstream API times out. What happens to the job?','How do you guarantee a call is not placed twice?','What is your backoff strategy and why?']},
+ {id:'s5',n:'05',title:'Consistency, CAP, rate limiting',when:'module 5',
+  note:'Know the vocabulary cold. Skip distributed consensus, Raft, and CRDTs — genuinely interesting, and not asked at new-grad level.',
+  tasks:[
+   {id:'s501',l:'CAP, eventual vs strong consistency, read-your-writes'},
+   {id:'s502',l:'Idempotency keys and safe retries'},
+   {id:'s503',l:'Token bucket, leaky bucket, sliding window'}
+  ],
+  q:['Where would you accept eventual consistency here?','How do you rate limit per user across many servers?','What breaks first under 10x traffic?']},
+ {id:'s6',n:'06',title:'Full walkthroughs, timed',when:'module 6',
+  note:'Stop learning components. Start delivering complete answers out loud under time pressure. Record yourself once — it is unpleasant and it works.',
+  tasks:[
+   {id:'s601',l:'URL shortener, 35 minutes, out loud'},
+   {id:'s602',l:'News feed, 35 minutes, out loud'},
+   {id:'s603',l:'Rate limiter, 35 minutes, out loud'},
+   {id:'s604',l:'RAG serving system, 35 minutes',s:'Your home ground — this is the one to be excellent at'}
+  ],
+  q:['Scope the requirements before drawing anything.','State your estimates out loud, even rough ones.','Name the bottleneck before the interviewer does.']}];
+
+const ML=[
+ {id:'m1',n:'01',title:'Attention, from scratch',when:'first',
+  note:'You have a preprint on calibration and Transformer surrogate models on real telemetry. An interviewer will reasonably assume you can derive multi-head attention on a whiteboard. Two hours closes that gap permanently.',
+  tasks:[
+   {id:'m101',l:'3Blue1Brown Ch.6 — Attention (26 min)',u:'https://www.3blue1brown.com/lessons/attention'},
+   {id:'m102',l:'Karpathy — Let\'s build GPT (1h56m)',u:'https://karpathy.ai/zero-to-hero.html'},
+   {id:'m103',l:'Implement scaled dot-product attention from memory, no reference'}
+  ],
+  q:['Why divide by the square root of d_k?','What does the causal mask actually do to the softmax?','Why do transformers need positional encoding at all?']},
+ {id:'m2',n:'02',title:'The standard sweep',when:'Sept – Oct',
+  note:'These are the questions applied ML loops actually ask. Narrow band depth does not cover them, and they are cheap to close.',
+  tasks:[
+   {id:'m201',l:'Bias-variance, L1/L2, dropout'},
+   {id:'m202',l:'Why cross-entropy rather than MSE for classification'},
+   {id:'m203',l:'SGD, momentum, Adam — and when Adam hurts'},
+   {id:'m204',l:'BatchNorm vs LayerNorm, and why transformers use the latter'},
+   {id:'m205',l:'Precision, recall, F1, AUC — and when each misleads'},
+   {id:'m206',l:'Class imbalance, train/val/test discipline, leakage'}
+  ],
+  q:['Your model is 99% accurate on a 1% positive class. What now?','Validation loss rises while training loss falls. Diagnose it.','When is AUC the wrong metric?']},
+ {id:'m3',n:'03',title:'Calibration — steer questions here',when:'ongoing',
+  note:'Most candidates say "we use temperature scaling" and stop. You proved an exact analytical law for how that scaling distorts a Bayes-error estimator, and showed the proxy varies 56x to 980x at constant test error. Practice getting evaluation questions onto this ground.',
+  tasks:[
+   {id:'m301',l:'Rehearse the two-minute version of your result',s:'Margin-folding identity, monotone bijection, the fixed-classifier consequence'},
+   {id:'m302',l:'Read: Does confidence calibration improve conformal prediction?',s:'Sits exactly on the seam between your result and the distribution-free literature',u:'https://arxiv.org/abs/2402.04344'},
+   {id:'m303',l:'Skim the awesome-conformal-prediction video lectures',u:'https://github.com/valeman/awesome-conformal-prediction'}
+  ],
+  q:['How do you know your model\'s confidence means anything?','What is the difference between accuracy and calibration?','A well-calibrated model and an accurate one — are they the same?']},
+ {id:'m4',n:'04',title:'Implementation drills',when:'weekly',
+  note:'ML interviews ask you to write code, not only explain concepts. You have micrograd and makemore behind you, so this is consolidation rather than new learning.',
+  tasks:[
+   {id:'m401',l:'Scaled dot-product attention'},
+   {id:'m402',l:'Logistic regression with gradient descent'},
+   {id:'m403',l:'k-means'},
+   {id:'m404',l:'Training loop with manual batching'},
+   {id:'m405',l:'Beam search'}
+  ]},
+ {id:'m5',n:'05',title:'LLM systems',when:'research track only',
+  note:'Open this only if ML Research Engineer roles are actually live in your pipeline. It will not come up in SWE or analyst loops, and it is a large time commitment.',
+  tasks:[
+   {id:'m501',l:'CS336 — Inference',u:'https://stanford-cs336.github.io/spring2025/'},
+   {id:'m502',l:'CS336 — Evaluation'},
+   {id:'m503',l:'CS336 — Scaling Laws'},
+   {id:'m504',l:'stas00/ml-engineering for serving vocabulary',u:'https://github.com/stas00/ml-engineering'}
+  ]}];
+
+const DSA=[
+ {id:'d1',n:'01',title:'Backtracking',when:'current',note:'Where you are now. Subsets, permutations, combination sum, word search, N-queens. The pattern is the same every time: choose, explore, un-choose.',
+  tasks:[{id:'d101',l:'Work the NC150 backtracking set'},{id:'d102',l:'Cold re-solve three of them a week later'}]},
+ {id:'d2',n:'02',title:'Graphs',when:'next',note:'Highest-frequency remaining topic by a wide margin. If your schedule compresses, this is the one that survives.',
+  tasks:[{id:'d201',l:'BFS/DFS, number of islands, clone graph, course schedule'},{id:'d202',l:'Topological sort and union-find'},{id:'d203',l:'Cold re-solve three a week later'}]},
+ {id:'d3',n:'03',title:'Advanced graphs',when:'',note:'Dijkstra, Prim, Kruskal, Bellman-Ford. Lower frequency, but they do appear and they are unbluffable.',
+  tasks:[{id:'d301',l:'Shortest path family'},{id:'d302',l:'Minimum spanning tree family'}]},
+ {id:'d4',n:'04',title:'1-D dynamic programming',when:'October',note:'Derive the recurrence, never memorize the solution. Aditya Verma teaches recursion into memoization into tabulation as one continuous pipeline, which is the framing that makes DP click.',
+  tasks:[{id:'d401',l:'Climbing stairs, house robber, coin change, LIS'},{id:'d402',l:'Word break, decode ways'},{id:'d403',l:'Cold re-solve four a week later'}]},
+ {id:'d5',n:'05',title:'2-D dynamic programming',when:'October',note:'Grid paths, edit distance, longest common subsequence, knapsack variants.',
+  tasks:[{id:'d501',l:'Grid and string DP'},{id:'d502',l:'Cold re-solve three a week later'}]},
+ {id:'d6',n:'06',title:'Greedy, intervals, math, bits',when:'November',note:'Lower frequency and faster to close. Batch them into one month.',
+  tasks:[{id:'d601',l:'Greedy'},{id:'d602',l:'Intervals'},{id:'d603',l:'Math and geometry'},{id:'d604',l:'Bit manipulation'}]}];
+
+const ST=[
+ {id:'st1',n:'01',title:'arXiv Paper Curator — the RAG stack',when:'',
+  note:'Lead with the debugging and deployment, not the architecture. The seven-service design came from a course curriculum; the CUDA wheel diagnosis, the EC2 deployment, and the caching layer are yours. Naming the lineage is the version that survives an interview.',
+  tasks:[
+   {id:'st101',l:'The CUDA wheel bloat story',s:'How you found it, why the image was 8GB, what pinning CPU-only wheels via uv actually changed'},
+   {id:'st102',l:'The caching decision',s:'150-400x on repeated queries, measured by Langfuse traces. Be ready for "how did you measure that?"'},
+   {id:'st103',l:'Why seven services',s:'And which one you would merge if you rebuilt it'}
+  ]},
+ {id:'st2',n:'02',title:'Voice AI platform — the codebase rescue',when:'',
+  note:'The strongest engineering story you have, and it is a rescue rather than a build, which interviewers find more interesting. Have the "why did you leave after six months" answer ready and unbothered.',
+  tasks:[
+   {id:'st201',l:'Zero working routes to a passing suite',s:'79 runtime errors, 40 missing dependencies, 45 files. Ten of eleven tests. Know what the eleventh was.'},
+   {id:'st202',l:'The webhook queue',s:'Retries, backoff, idempotency. This doubles as system design material.'},
+   {id:'st203',l:'Leading nine developers as an intern',s:'Expect scope scrutiny. Answer plainly, do not oversell.'}
+  ]},
+ {id:'st3',n:'03',title:'The preprint',when:'',
+  note:'Never call it published, peer-reviewed, or accepted. Solo-authored arXiv preprint presenting original theory. If TAE accepts, the word non-archival travels with it.',
+  tasks:[
+   {id:'st301',l:'The result in two minutes, no math'},
+   {id:'st302',l:'The result in ten minutes, with the margin-folding identity'},
+   {id:'st303',l:'Why it matters',s:'A fixed classifier with unchanged decisions and unchanged test error can report any proxy value in the range. That is the sentence.'}
+  ]},
+ {id:'st4',n:'04',title:'Quantum-network surrogate',when:'',
+  note:'Genuine research experience, unpublished. Describe contributions, architecture, and methods — never imply it is under review.',
+  tasks:[
+   {id:'st401',l:'Why Huber over squared error',s:'The best answer in this project: irregular timing outliers from physical quantum hardware'},
+   {id:'st402',l:'The multi-task head design',s:'Softmax channel head plus regression time head, one shared encoder'},
+   {id:'st403',l:'2 to 4 channel scaling with no structural change'}
+  ]},
+ {id:'st5',n:'05',title:'Metric defense',when:'all resumes',
+  note:'Interview probing is the primary way overstatement gets caught. Every number on every resume needs a derivation you can produce on demand. Anything you cannot defend should come off the page instead.',
+  tasks:[
+   {id:'st501',l:'Walk every figure on the ML resume'},
+   {id:'st502',l:'Walk every figure on the SWE resume'},
+   {id:'st503',l:'Walk every figure on the research resume'},
+   {id:'st504',l:'Walk every figure on the analytics resume'}
+  ]}];
+
+const RES=[
+ {t:'Hello Interview — System Design',d:'Free tier, pitched correctly for new-grad through senior. Teaches a delivery framework before components, which is exactly the gap.',u:'https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction',tag:'Core',c:'t-core',m:'Free · Course'},
+ {t:'interviewing.io — Replays',d:'Real recorded mocks where the interviewer explains afterward what registered as a hire signal. Includes system design and a DP breakdown.',u:'https://interviewing.io/learn',tag:'Video',c:'t-vid',m:'Free · Video'},
+ {t:'Karpathy — Zero to Hero',d:'"Let\'s build GPT" is the one you need. Skip Backprop Ninja unless research roles are live.',u:'https://karpathy.ai/zero-to-hero.html',tag:'Core',c:'t-core',m:'Free · Video'},
+ {t:'Grind75',d:'Builds a problem schedule from your real available hours. The only free curriculum verified as actively maintained.',u:'https://www.techinterviewhandbook.org/grind75',tag:'Core',c:'t-core',m:'Free · Tool'},
+ {t:'Hello Interview — ML System Design',d:'Free and in early access, built by FAANG hiring managers. Publishes the rubric interviewers score against.',u:'https://www.hellointerview.com/learn/ml-system-design/in-a-hurry/introduction',tag:'Free',c:'t-free',m:'Free · Course'},
+ {t:'NeetCode',d:'Finish what you started. Nine topics left. The free tier is enough.',u:'https://neetcode.io/practice',tag:'Core',c:'t-core',m:'Free · Video'},
+ {t:'3Blue1Brown — Attention',d:'Twenty-six minutes that makes Karpathy\'s code legible instead of just typeable. Watch it first.',u:'https://www.3blue1brown.com/lessons/attention',tag:'Video',c:'t-vid',m:'Free · 26 min'},
+ {t:'Stanford CS336',d:'Hashimoto and Liang. Implementation-heavy. Inference, Evaluation, and Scaling Laws serve the research track.',u:'https://stanford-cs336.github.io/spring2025/',tag:'Video',c:'t-vid',m:'Free · Course'},
+ {t:'awesome-conformal-prediction',d:'Actively maintained and video-forward. The natural adjacency to your calibration work.',u:'https://github.com/valeman/awesome-conformal-prediction',tag:'Free',c:'t-free',m:'Free · Curated'},
+ {t:'arXiv:2402.04344',d:'Does confidence calibration improve conformal prediction? The paper closest to your own result.',u:'https://arxiv.org/abs/2402.04344',tag:'Free',c:'t-free',m:'Free · Paper'},
+ {t:'Pramp',d:'Five free credits monthly. The scarcity is useful — prepare for each one rather than burning them as reps.',u:'https://www.pramp.com/',tag:'Free',c:'t-free',m:'Free tier · Mock'},
+ {t:'DDIA 2nd edition',d:'Second edition landed March 2026. Read the three free chapters; leave the other six hundred pages for later.',u:'https://lp.scylladb.com/designing-data-intensive-apps-book-offer',tag:'Free',c:'t-free',m:'Free · 150pp'},
+ {t:'stas00/ml-engineering',d:'The most actively maintained free reference on LLM systems engineering. Converts your RAG and EC2 work into serving vocabulary.',u:'https://github.com/stas00/ml-engineering',tag:'Free',c:'t-free',m:'Free · Reference'},
+ {t:'alirezadir/ML-Interviews',d:'The maintained ML interview repository, replacing the one older threads still recommend.',u:'https://github.com/alirezadir/Machine-Learning-Interviews',tag:'Free',c:'t-free',m:'Free · Repo'},
+ {t:'DataLemur',d:'Covers the analyst track\'s only real technical filter. Verified company provenance and solution videos.',u:'https://datalemur.com/',tag:'Free',c:'t-free',m:'Free tier · SQL'},
+ {t:'System Design Primer',d:'Use as a glossary, not a study path — content has been frozen since late 2024. The Anki decks are the best part.',u:'https://github.com/donnemartin/system-design-primer',tag:'Free',c:'t-free',m:'Free · Reference'}
+];
+
+const KEY='prep-playbook-v2';
+let S=JSON.parse(localStorage.getItem(KEY)||'{}');
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+
+function row(t){
+  return `<div class="item">
+    <input type="checkbox" id="${t.id}" ${S[t.id]?'checked':''} data-t="${t.id}">
+    <label for="${t.id}">${t.l}${t.s?`<small>${t.s}</small>`:''}${t.u?`<a href="${t.u}" target="_blank" rel="noopener">Open ↗</a>`:''}</label>
+  </div>`;
+}
+
+function cards(list,el,open){
+  document.getElementById(el).innerHTML=list.map((c,i)=>{
+    const d=c.tasks.filter(t=>S[t.id]).length;
+    return `<div class="card ${open&&i===0?'open':''}" data-c="${c.id}">
+      <button class="card-head" aria-expanded="${open&&i===0}">
+        <span class="idx">${c.n}</span><span class="ct">${c.title}</span>
+        <span class="cw">${d}/${c.tasks.length}${c.when?' · '+c.when:''}</span>
+        <span class="chev">▶</span></button>
+      <div class="card-body"><div class="ci">
+        ${c.note?`<p class="note">${c.note}</p>`:''}
+        ${c.tasks.map(row).join('')}
+        ${c.q?`<div class="qb"><h5>Expect to be asked</h5><ul>${c.q.map(x=>`<li>${x}</li>`).join('')}</ul></div>`:''}
+      </div></div></div>`;
+  }).join('');
+}
+
+const ALL=()=>[...FIRST,...RHY,...PHASES,...SD,...ML,...DSA,...ST].flatMap(c=>c.tasks);
+
+function counts(){
+  [...FIRST,...RHY,...PHASES,...SD,...ML,...DSA,...ST].forEach(c=>{
+    const el=document.querySelector(`[data-c="${c.id}"] .cw`);
+    if(el){const d=c.tasks.filter(t=>S[t.id]).length;el.textContent=`${d}/${c.tasks.length}${c.when?' · '+c.when:''}`;}
+  });
+}
+
+function render(){
+  document.getElementById('mapBody').innerHTML=MAP.map(r=>
+    `<tr><td>${r[0]}${r[1]}</td>${r.slice(2).map(v=>`<td><i class="dot d-${v}"></i></td>`).join('')}</tr>`).join('');
+  cards(FIRST,'firstWeek',true); cards(RHY,'rhythm',true);
+  cards(PHASES,'phases'); cards(SD,'sdMods'); cards(ML,'mlMods');
+  cards(DSA,'dsaMods'); cards(ST,'stories');
+  document.getElementById('resGrid').innerHTML=RES.map(r=>
+    `<a class="res" href="${r.u}" target="_blank" rel="noopener">
+      <div class="rt"><h4>${r.t}</h4><span class="tag ${r.c}">${r.tag}</span></div>
+      <p>${r.d}</p><div class="rm">${r.m}</div></a>`).join('');
+  document.querySelectorAll('[data-t]').forEach(cb=>{
+    cb.onchange=()=>{cb.checked?S[cb.dataset.t]=1:delete S[cb.dataset.t];save();counts();};
+  });
+  counts();
+}
+
+document.addEventListener('click',e=>{
+  const h=e.target.closest('.card-head');
+  if(h){const c=h.parentElement;c.classList.toggle('open');h.setAttribute('aria-expanded',c.classList.contains('open'));}
+});
+document.querySelectorAll('.tab').forEach(t=>{
+  t.onclick=()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected','false'));
+    t.setAttribute('aria-selected','true');
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+    document.getElementById('p-'+t.dataset.p).classList.add('on');
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+});
+document.getElementById('expandAll').onclick=()=>{
+  const anyOpen=document.querySelectorAll('.card.open').length>0;
+  document.querySelectorAll('.card').forEach(c=>{
+    c.classList.toggle('open',!anyOpen);
+    c.querySelector('.card-head').setAttribute('aria-expanded',!anyOpen);
+  });
+};
+document.getElementById('reset').onclick=()=>{
+  if(confirm('Clear all checkmarks?')){localStorage.removeItem(KEY);S={};render();}
+};
+render();
+</script>
+</body>
+</html>
